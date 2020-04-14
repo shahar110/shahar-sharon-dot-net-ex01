@@ -8,6 +8,7 @@ namespace B20_Ex01_1
         public static void Main()
         {
             Console.WriteLine("Commit test!");
+            Console.WriteLine("Hi");
         }
     }
 }
