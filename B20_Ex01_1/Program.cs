@@ -9,6 +9,8 @@ namespace B20_Ex01_1
         {
             Console.WriteLine("Commit test!");
             Console.WriteLine("Hi");
+            Console.WriteLine("Press any key...");
+            string test = Console.ReadLine();
         }
     }
 }
