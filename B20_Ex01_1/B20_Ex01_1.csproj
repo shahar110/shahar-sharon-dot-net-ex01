@@ -37,7 +37,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="NumberStats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
