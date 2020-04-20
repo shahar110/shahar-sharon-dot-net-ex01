@@ -1,4 +1,9 @@
-﻿using System.Text;
+﻿//TODO- 
+//1.change to string-all method
+//2. improve loops to stop when possible.
+//3.remove read line at the end
+
+using System.Text;
 namespace B20_Ex01_1
 {
     class Program
@@ -9,9 +14,6 @@ namespace B20_Ex01_1
             string userInput1 = "";
             string userInput2 = "";
             string userInput3 = "";
-            int m_decimalInput1;
-            int m_decimalInput2;
-            int m_decimalInput3;
 
             System.Console.WriteLine("Please enter 3 binary numbers, 9 digits each: ");
                   
@@ -37,10 +39,10 @@ namespace B20_Ex01_1
                     userInput3 = userInput;
                 }
             }
-
-            m_decimalInput1 = binaryStringToInt(userInput1);
-            m_decimalInput2 = binaryStringToInt(userInput2);
-            m_decimalInput3 = binaryStringToInt(userInput3);
+            
+            int m_decimalInput1 = binaryStringToInt(userInput1);
+            int m_decimalInput2 = binaryStringToInt(userInput2);
+            int m_decimalInput3 = binaryStringToInt(userInput3);
 
             System.Console.WriteLine(string.Format(
 @"The decimal numbers are: {0} {1} {2}.
@@ -51,15 +53,15 @@ The smallest number is: {7}, the biggest number is: {8}.",
                m_decimalInput1,
                m_decimalInput2,
                m_decimalInput3,
-               CalculateAverageDigit(userInput1, userInput2, userInput3, '0'),
-               CalculateAverageDigit(userInput1, userInput2, userInput3, '1'),
-               AmountOfPowerOf2(m_decimalInput1, m_decimalInput2, m_decimalInput3),
-               AmountOfAscendingOrderNumbers(m_decimalInput1, m_decimalInput2, m_decimalInput3),
-               GetMin(m_decimalInput1, m_decimalInput2, m_decimalInput3),
-               GetMax(m_decimalInput1, m_decimalInput2, m_decimalInput3)
+               calculateAverageDigit(userInput1, userInput2, userInput3, '0'),
+               calculateAverageDigit(userInput1, userInput2, userInput3, '1'),
+               amountOfPowerOf2(m_decimalInput1, m_decimalInput2, m_decimalInput3),
+               amountOfAscendingOrderNumbers(m_decimalInput1, m_decimalInput2, m_decimalInput3),
+               getMin(m_decimalInput1, m_decimalInput2, m_decimalInput3),
+               getMax(m_decimalInput1, m_decimalInput2, m_decimalInput3)
                ));
 
-            System.Console.ReadLine();
+            System.Console.ReadLine();  //!!!!REMOVE THIS
                          
         }
 
@@ -99,17 +101,17 @@ The smallest number is: {7}, the biggest number is: {8}.",
             return decimalNumber;
         }
 
-        private static int GetMin(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
+        private static int getMin(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
         {
             return System.Math.Min(System.Math.Min(i_FirstNumber, i_SecondNumber), i_ThirdNumber);
         }
 
-        private static int GetMax(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
+        private static int getMax(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
         {
             return System.Math.Max(System.Math.Max(i_FirstNumber, i_SecondNumber), i_ThirdNumber);
         }
 
-        private static int AmountOfPowerOf2(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
+        private static int amountOfPowerOf2(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
         {
             int amountOfPowerOf2 = 0;
 
@@ -147,7 +149,7 @@ The smallest number is: {7}, the biggest number is: {8}.",
             return isPowerOfTwo;
         }
 
-        private static int AmountOfAscendingOrderNumbers(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
+        private static int amountOfAscendingOrderNumbers(int i_FirstNumber, int i_SecondNumber, int i_ThirdNumber)
         {
             int amountOfAscending = 0;
 
@@ -194,7 +196,7 @@ The smallest number is: {7}, the biggest number is: {8}.",
             return m_isAscendingSeries;
         }
 
-        private static double CalculateAverageDigit(string userInput1, string userInput2, string userInput3, char i_Digit)
+        private static double calculateAverageDigit(string userInput1, string userInput2, string userInput3, char i_Digit)
         {
             return (countDigitInString(userInput1, i_Digit)
                    + countDigitInString(userInput2, i_Digit)
