@@ -6,7 +6,7 @@
         {
             string inputNumber;
 
-            System.Console.WriteLine("Pease Enter a positive 9 digit integer:");
+            System.Console.WriteLine("Please Enter a positive 9 digit integer:");
 
             getInputFromUser(out inputNumber);
 
