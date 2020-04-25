@@ -1,48 +1,22 @@
-﻿//TODO- 
-//1.change to string-all method
-//2. improve loops to stop when possible.
-//3.remove read line at the end
-
-using System.Text;
-namespace B20_Ex01_1
+﻿namespace B20_Ex01_1
 {
     class Program
     {
         public static void Main()
         {
-            string userInput;
-            string userInput1 = "";
-            string userInput2 = "";
-            string userInput3 = "";
+            string firstUserInput;
+            string secondUserInput;
+            string thirdUserInput;
 
             System.Console.WriteLine("Please enter 3 binary numbers, 9 digits each: ");
-                  
-            for (int i = 0; i < 3; i++)
-            {
-                userInput = System.Console.ReadLine();
-                while (!inputIsValid(userInput))
-                {
-                    System.Console.WriteLine("The input you entered is invalid. Please try again.");
-                    userInput = System.Console.ReadLine();
-                }
 
-                if (i == 0)
-                {
-                    userInput1 = userInput;
-                }
-                else if(i == 1)
-                {
-                    userInput2 = userInput;
-                }
-                else
-                {
-                    userInput3 = userInput;
-                }
-            }
-            
-            int m_decimalInput1 = binaryStringToInt(userInput1);
-            int m_decimalInput2 = binaryStringToInt(userInput2);
-            int m_decimalInput3 = binaryStringToInt(userInput3);
+            getInputFromUser(out firstUserInput);
+            getInputFromUser(out secondUserInput);
+            getInputFromUser(out thirdUserInput);
+
+            int decimalInput1 = binaryToDecimal(firstUserInput);
+            int decimalInput2 = binaryToDecimal(secondUserInput);
+            int decimalInput3 = binaryToDecimal(thirdUserInput);
 
             System.Console.WriteLine(string.Format(
 @"The decimal numbers are: {0} {1} {2}.
@@ -50,19 +24,29 @@ The average number of 0's is: {3:0.0}, the average number of 1's is: {4:0.0}.
 There are {5} numbers which are power of two.
 There are {6} numbers which are in ascending order.
 The smallest number is: {7}, the biggest number is: {8}.",
-               m_decimalInput1,
-               m_decimalInput2,
-               m_decimalInput3,
-               calculateAverageDigit(userInput1, userInput2, userInput3, '0'),
-               calculateAverageDigit(userInput1, userInput2, userInput3, '1'),
-               amountOfPowerOf2(m_decimalInput1, m_decimalInput2, m_decimalInput3),
-               amountOfAscendingOrderNumbers(m_decimalInput1, m_decimalInput2, m_decimalInput3),
-               getMin(m_decimalInput1, m_decimalInput2, m_decimalInput3),
-               getMax(m_decimalInput1, m_decimalInput2, m_decimalInput3)
+               decimalInput1,
+               decimalInput2,
+               decimalInput3,
+               calculateAverageDigit(firstUserInput, secondUserInput, thirdUserInput, '0'),
+               calculateAverageDigit(firstUserInput, secondUserInput, thirdUserInput, '1'),
+               amountOfPowerOf2(decimalInput1, decimalInput2, decimalInput3),
+               amountOfAscendingOrderNumbers(decimalInput1, decimalInput2, decimalInput3),
+               getMin(decimalInput1, decimalInput2, decimalInput3),
+               getMax(decimalInput1, decimalInput2, decimalInput3)
                ));
+        }
 
-            System.Console.ReadLine();  //!!!!REMOVE THIS
-                         
+        private static void getInputFromUser(out string o_UserInput)
+        {
+            string userInput = System.Console.ReadLine();
+
+            while (!inputIsValid(userInput))
+            {
+                System.Console.WriteLine("The input you entered is invalid. Please try again.");
+                userInput = System.Console.ReadLine();
+            }
+
+            o_UserInput = userInput;
         }
 
         private static bool inputIsValid(string i_ReadNumber)
@@ -73,22 +57,25 @@ The smallest number is: {7}, the biggest number is: {8}.",
             {
                 isValid = false;
             }
+            else if (binaryToDecimal(i_ReadNumber) == 0)
+            {
+                isValid = false;
+            }
             else
             {
-                for (int i = 0; i < i_ReadNumber.Length; i++)
+                for (int i = 0; i < i_ReadNumber.Length && isValid; i++)
                 {
                     if (!i_ReadNumber[i].Equals('0') && !i_ReadNumber[i].Equals('1'))
                     {
                         isValid = false;
-                        break;
                     }
                 }
             }
 
             return isValid;
         }
-        
-        private static int binaryStringToInt(string binaryNumber)
+
+        private static int binaryToDecimal(string binaryNumber)
         {
             int decimalNumber = 0;
 

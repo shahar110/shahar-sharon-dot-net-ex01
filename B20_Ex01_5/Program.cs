@@ -1,7 +1,4 @@
-﻿//3.remove read line at the end
-
-
-namespace B20_Ex01_5
+﻿namespace B20_Ex01_5
 {
     class Program
     {
@@ -10,13 +7,8 @@ namespace B20_Ex01_5
             string inputNumber;
 
             System.Console.WriteLine("Pease Enter a positive 9 digit integer:");
-            inputNumber = System.Console.ReadLine();
 
-            while (!inputIsValid(inputNumber))
-            {
-                System.Console.WriteLine("The input you entered is invalid. Please try again.");
-                inputNumber = System.Console.ReadLine();
-            }
+            getInputFromUser(out inputNumber);
 
             System.Console.WriteLine(string.Format(
 @"The biggest digit in the number is: {0},
@@ -28,9 +20,19 @@ There are {3} digits the are bigger than the Unit's place.",
             getAmountOfDigitDevisibleBy3(inputNumber),
             getAmountOfDigitBiggerThanUnitPlace(inputNumber)
             ));
+        }
 
-            System.Console.ReadLine();
+        private static void getInputFromUser(out string o_userInput)
+        {
+            string userInput = System.Console.ReadLine();
 
+            while (!inputIsValid(userInput))
+            {
+                System.Console.WriteLine("The input you entered is invalid. Please try again.");
+                userInput = System.Console.ReadLine();
+            }
+
+            o_userInput = userInput;
         }
 
         private static bool inputIsValid(string i_ReadNumber)
@@ -41,11 +43,15 @@ There are {3} digits the are bigger than the Unit's place.",
             {
                 isValid = false;
             }
+            else if(isZero(i_ReadNumber))
+            {
+                isValid = false;
+            }
             else
             {
-                foreach(char c in i_ReadNumber.ToCharArray())
+                for(int i = 0; i < i_ReadNumber.Length && isValid; i++)
                 {
-                    if (!char.IsDigit(c))
+                    if (!char.IsDigit(i_ReadNumber[i]))
                     {
                         isValid = false;
                     }
@@ -55,15 +61,30 @@ There are {3} digits the are bigger than the Unit's place.",
             return isValid;
         }
 
+        private static bool isZero(string i_ReadNumber)
+        {
+            bool isZero = true;
+
+            for (int i = 0; i < i_ReadNumber.Length && isZero; i++)
+            {
+                if (i_ReadNumber[i] != '0')
+                {
+                    isZero = false;
+                }
+            }
+
+            return isZero;
+        }
+
         private static char getMaxDigit(string i_ReadNumber)
         {
             char maxDigit = i_ReadNumber[0];
 
-            foreach (char c in i_ReadNumber.ToCharArray())
+            for (int i = 0; i < i_ReadNumber.Length; i++)
             {
-                if (c > maxDigit)
+                if (i_ReadNumber[i] > maxDigit)
                 {
-                    maxDigit = c;
+                    maxDigit = i_ReadNumber[i];
                 }
             }
 
@@ -74,11 +95,11 @@ There are {3} digits the are bigger than the Unit's place.",
         {
             char minDigit = i_ReadNumber[0];
 
-            foreach (char c in i_ReadNumber.ToCharArray())
+            for (int i = 0; i < i_ReadNumber.Length; i++)
             {
-                if (c < minDigit)
+                if (i_ReadNumber[i] < minDigit)
                 {
-                    minDigit = c;
+                    minDigit = i_ReadNumber[i];
                 }
             }
 
@@ -89,9 +110,9 @@ There are {3} digits the are bigger than the Unit's place.",
         {
             int amountDevisibileBy3 = 0; ;
 
-            foreach(char c in i_ReadNumber.ToCharArray())
+            for(int i = 0; i < i_ReadNumber.Length; i++)
             {
-                if ((int)char.GetNumericValue(c) % 3 == 0)
+                if ((int)char.GetNumericValue(i_ReadNumber[i]) % 3 == 0)
                 {
                     amountDevisibileBy3++;
                 }
@@ -105,9 +126,9 @@ There are {3} digits the are bigger than the Unit's place.",
             char digitInUnitsPlace = i_ReadNumber[i_ReadNumber.Length - 1];
             int amountBiggeerThanUnitsPlace = 0;
 
-            foreach (char c in i_ReadNumber)
+            for (int i = 0; i < i_ReadNumber.Length; i++)
             {
-                if (c > digitInUnitsPlace)
+                if (i_ReadNumber[i] > digitInUnitsPlace)
                 {
                     amountBiggeerThanUnitsPlace++;
                 }
@@ -115,21 +136,5 @@ There are {3} digits the are bigger than the Unit's place.",
 
             return amountBiggeerThanUnitsPlace;
         }
-
-        /*
-         program flow:
-
-        read an input string from user (and check its validity)
-        convert string input into int (and remove leading zeros)
-
-        now we have what we want. we need to do:
-        1. max digit in number
-        2. min digit in number
-        3. how many digits devide in 3 without remainder
-        4. how many digits are bigger then the units place
-
-      
-         
-         */
     }
 }
