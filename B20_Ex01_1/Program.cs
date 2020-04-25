@@ -1,6 +1,6 @@
 ﻿namespace B20_Ex01_1
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
@@ -32,15 +32,14 @@ The smallest number is: {7}, the biggest number is: {8}.",
                amountOfPowerOf2(decimalInput1, decimalInput2, decimalInput3),
                amountOfAscendingOrderNumbers(decimalInput1, decimalInput2, decimalInput3),
                getMin(decimalInput1, decimalInput2, decimalInput3),
-               getMax(decimalInput1, decimalInput2, decimalInput3)
-               ));
+               getMax(decimalInput1, decimalInput2, decimalInput3)));
         }
 
         private static void getInputFromUser(out string o_UserInput)
         {
             string userInput = System.Console.ReadLine();
 
-            while (!inputIsValid(userInput))
+            while(!inputIsValid(userInput))
             {
                 System.Console.WriteLine("The input you entered is invalid. Please try again.");
                 userInput = System.Console.ReadLine();
@@ -53,19 +52,19 @@ The smallest number is: {7}, the biggest number is: {8}.",
         {
             bool isValid = true;
 
-            if (i_ReadNumber.Length != 9)
+            if(i_ReadNumber.Length != 9)
             {
                 isValid = false;
             }
-            else if (binaryToDecimal(i_ReadNumber) == 0)
+            else if(binaryToDecimal(i_ReadNumber) == 0)
             {
                 isValid = false;
             }
             else
             {
-                for (int i = 0; i < i_ReadNumber.Length && isValid; i++)
+                for(int i = 0; i < i_ReadNumber.Length && isValid; i++)
                 {
-                    if (!i_ReadNumber[i].Equals('0') && !i_ReadNumber[i].Equals('1'))
+                    if(!i_ReadNumber[i].Equals('0') && !i_ReadNumber[i].Equals('1'))
                     {
                         isValid = false;
                     }
@@ -79,7 +78,7 @@ The smallest number is: {7}, the biggest number is: {8}.",
         {
             int decimalNumber = 0;
 
-            for (int i = 0; i < 9; i++)
+            for(int i = 0; i < 9; i++)
             {
                 int power = 9 - 1 - i;
                 decimalNumber += (binaryNumber[i] - '0') * (int)System.Math.Pow(2, power);
@@ -102,17 +101,17 @@ The smallest number is: {7}, the biggest number is: {8}.",
         {
             int amountOfPowerOf2 = 0;
 
-            if (isPowerOf2(i_FirstNumber))
+            if(isPowerOf2(i_FirstNumber))
             {
                 amountOfPowerOf2++;
             }
 
-            if (isPowerOf2(i_SecondNumber))
+            if(isPowerOf2(i_SecondNumber))
             {
                 amountOfPowerOf2++;
             }
 
-            if (isPowerOf2(i_ThirdNumber))
+            if(isPowerOf2(i_ThirdNumber))
             {
                 amountOfPowerOf2++;
             }
@@ -124,11 +123,12 @@ The smallest number is: {7}, the biggest number is: {8}.",
         {
             bool isPowerOfTwo = false;
 
-            if (i_DecimalNumber == 0)
+            if(i_DecimalNumber == 0)
             {
                 isPowerOfTwo = false;
             }
-            if (System.Math.Ceiling(System.Math.Log(i_DecimalNumber, 2)) == System.Math.Floor(System.Math.Log(i_DecimalNumber, 2)))
+
+            if(System.Math.Ceiling(System.Math.Log(i_DecimalNumber, 2)) == System.Math.Floor(System.Math.Log(i_DecimalNumber, 2)))
             {
                 isPowerOfTwo = true;
             }
@@ -140,17 +140,17 @@ The smallest number is: {7}, the biggest number is: {8}.",
         {
             int amountOfAscending = 0;
 
-            if (isAscendingOrder(i_FirstNumber))
+            if(isAscendingOrder(i_FirstNumber))
             {
                 amountOfAscending++;
             }
 
-            if (isAscendingOrder(i_SecondNumber))
+            if(isAscendingOrder(i_SecondNumber))
             {
                 amountOfAscending++;
             }
 
-            if (isAscendingOrder(i_ThirdNumber))
+            if(isAscendingOrder(i_ThirdNumber))
             {
                 amountOfAscending++;
             }
@@ -165,9 +165,9 @@ The smallest number is: {7}, the biggest number is: {8}.",
             i_DecimalNumber /= 10;
             int nextDigitToCheck = i_DecimalNumber % 10;
 
-            while (i_DecimalNumber != 0)
+            while(i_DecimalNumber != 0)
             {
-                if (currentReadDigit > nextDigitToCheck)
+                if(currentReadDigit > nextDigitToCheck)
                 {
                     currentReadDigit = nextDigitToCheck;
                     i_DecimalNumber /= 10;
@@ -194,7 +194,7 @@ The smallest number is: {7}, the biggest number is: {8}.",
         {
             int numberOfDigits = 0;
 
-            for (int i = 0; i < i_StringNumber.Length; i++)
+            for(int i = 0; i < i_StringNumber.Length; i++)
             {
                 if (i_StringNumber[i].Equals(i_Digit))
                 {
